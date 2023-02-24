@@ -1,0 +1,48 @@
+<div class="w-[1270px] mx-auto flex justify-center mt-5">
+  <form
+    class="w-[600px] mx-auto shadow-sm p-16"
+    (ngSubmit)="onSubmit(loginForm)"
+    #loginForm="ngForm"
+  >
+    <h3 class="text-center font-bold text-[22px]">Đăng nhập</h3>
+    <div class="form-group">
+      <label>Tài khoản</label>
+      <input
+        type="email"
+        class="form-control block border-[#9999] w-full border-[1px] mb-[10px]"
+        [(ngModel)]="userData.tenDN"
+        name="user"
+        required
+        minlength="6"
+        #user="ngModel"
+      />
+      <span *ngIf="!user?.valid && (user?.dirty || user?.touched)"
+        >Email không hợp lệ</span
+      >
+    </div>
+    <div class="form-group">
+      <label class="mt-[20px] inline-block">Mật khẩu</label>
+      <input
+        type="password"
+        class="form-control block border-[#9999] w-full border-[1px]"
+        [(ngModel)]="userData.matKhau"
+        name="pass"
+        required
+        minlength="6"
+        #pass="ngModel"
+      />
+      <span *ngIf="!pass?.valid && (pass?.dirty || pass?.touched)"
+        >Mật khẩu không hợp lệ</span
+      >
+    </div>
+    <div class="flex justify-center">
+      <button
+        type="submit"
+        class="btn btn-primary cursor-pointer bg-blue-400 text-[#fff] px-[20px] mt-[10px] rounded-[5px] py-[10px]"
+        [disabled]="!loginForm.valid"
+      >
+        Đăng Nhập
+      </button>
+    </div>
+  </form>
+</div>

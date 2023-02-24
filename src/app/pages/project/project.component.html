@@ -1,0 +1,173 @@
+<div>
+  <h1 class="text-[30px] font-[500] py-[20px] text-center">Quản lý dự án</h1>
+  <div class="w-[1300px] mx-auto my-0">
+    <ng-template #content let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <h1 class="font-[500] text-center text-[18px] pt-[10px]">
+          New Project
+        </h1>
+        <button
+          type="button"
+          class="btn-close bg-indigo-600 text-white flex items-center justify-center"
+          aria-label="Close"
+          (click)="d('Cross click')"
+        >x
+        </button>
+      </div>
+      <form
+        (ngSubmit)="onSubmit(projectForm)"
+        #projectForm="ngForm"
+        class="py-3 px-4"
+      >
+        <div class="form-group mb-2">
+          <label class="mt-[20px] inline-block mb-[10px]">Project Name</label>
+          <input
+            type="text"
+            class="form-control w-full block border-[#9999] border-[1px]"
+            [(ngModel)]="project.name"
+            name="name"
+            required
+            minlength="6"
+            #name="ngModel"
+          />
+          <span class="text-sm text-red-600" *ngIf="!name?.valid && (name?.dirty || name?.touched)"
+            >Project Name không hợp lệ</span
+          >
+        </div>
+        <div class="form-group">
+          <label class="mb-[10px]">Date of Start</label>
+          <input
+            type="date"
+            class="form-control w-full block border-[#9999] border-[1px] mb-[10px]"
+            [(ngModel)]="project.date"
+            name="date"
+            required
+            minlength="6"
+            #date="ngModel"
+          />
+          <span class="text-sm text-red-600" *ngIf="!date?.valid && (date?.dirty || date?.touched)"
+            >Date không hợp lệ</span
+          >
+        </div>
+        <div class="form-group">
+          <label class="mt-[20px] mb-[10px] inline-block">Team size</label>
+          <input
+            type="number"
+            class="form-control w-full block border-[#9999] border-[1px]"
+            [(ngModel)]="project.employs"
+            name="employs"
+            required
+            minlength="6"
+            #employs="ngModel"
+          />
+          <span class="text-sm text-red-600" *ngIf="!employs?.valid && (employs?.dirty || employs?.touched)"
+            >Team size không hợp lệ</span
+          >
+        </div>
+        <div class="form-group">
+          <label class="mt-[20px] mb-[10px] inline-block"
+            >Tông tiền dự án</label
+          >
+          <input
+            type="number"
+            class="form-control w-full block border-[#9999] border-[1px]"
+            [(ngModel)]="project.totalMoney"
+            name="totalMoney"
+            required
+            minlength="6"
+            #totalMoney="ngModel"
+          />
+          <span class="text-sm text-red-600"
+            *ngIf="
+              !totalMoney?.valid && (totalMoney?.dirty || totalMoney?.touched)
+            "
+            >Team size không hợp lệ</span
+          >
+        </div>
+        <div class="form-group">
+          <label class="mt-[20px] mb-[10px] inline-block">Trạng thái</label>
+          <select
+            class="form-control w-full block border-[#9999] border-[1px]"
+            [(ngModel)]="project.status"
+            name="status"
+            required
+            #status="ngModel"
+          >
+            <option value="waiting">Đang chờ</option>
+            <option value="pending">Tạm dừng</option>
+            <option value="processing">Đã triển khai</option>
+          </select>
+          <span class="text-sm text-red-600" *ngIf="!status?.valid && (status?.dirty || status?.touched)"
+            >Team size không hợp lệ</span
+          >
+        </div>
+        <div class="form-group">
+          <label class="mt-[20px] mb-[10px] inline-block">Thành viên tham gia</label>
+          <select
+            class="form-control w-full block border-[#9999] border-[1px]"
+            [(ngModel)]="project.members"
+            name="members"
+            required
+            #members="ngModel"
+            multiple
+          >
+            <option *ngFor="let member of memberList" value="{{member.id}}">{{member.name}}</option>
+          </select>
+          <span class="text-sm text-red-600" *ngIf="!members?.valid && (members?.dirty || members?.touched)"
+            >Vui lòng thêm thành viên</span
+          >
+        </div>
+        <input type="hidden" [(ngModel)]="project.id" #id="ngModel" name="id">
+        <button
+          type="submit"
+          class="btn btn-primary cursor-pointer bg-blue-400 text-[#fff] px-[20px] mt-[10px] rounded-[5px] py-[10px]"
+          [disabled]="!projectForm.valid"
+        >
+          Save
+        </button>
+      </form>
+    </ng-template>
+
+    <button class="rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm mb-3" (click)="open(content)">
+      Create Project
+    </button>
+  </div>
+  <div class="w-[1300px] mx-auto my-0">
+    <div>
+      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead>
+          <tr>
+            <th class="border p-3 text-center">Project ID</th>
+            <th class="border p-3 text-center">Project Name</th>
+            <th class="border p-3 text-center">Date of Start</th>
+            <th class="border p-3 text-center">Team Size</th>
+            <th class="border p-3 text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of projects; index as i">
+            <th class="border p-3 text-center">{{ i + 1 }}</th>
+            <td class="border p-3 text-center">
+              {{ item.name }}
+            </td>
+            <td class="border p-3 text-center">
+              {{ item.date }}
+            </td>
+            <td class="border p-3 text-center">
+              {{ item.employs }}
+            </td>
+            <td class="border p-3 text-center">
+              <button
+                class="btn btn-success mr-2"
+                (click)="openEditModal(item.id,content)"
+              >
+                Edit
+              </button>
+              <button class="btn btn-danger" (click)="Delete(item.id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

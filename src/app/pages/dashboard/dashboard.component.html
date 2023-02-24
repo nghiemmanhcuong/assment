@@ -1,0 +1,98 @@
+<div class="bg-[#EAE6E6] w-full h-[800px]">
+  <div class="bg-[#EAE6E6] h-full">
+    <div class="flex gap-4 h-full">
+      <div class="w-[25%] bg-white h-full py-10">
+        <p
+          class="bg-[#A49E9E] text-[#fff] font-[700] py-[10px] text-center mx-[10px] rounded-[10px]"
+        >
+          TRƯỞNG NHÓM
+        </p>
+        <span class="flex justify-center py-[10px]">
+          <img
+            src="{{ user.img }}"
+            class="w-[100px] h-[100px] rounded-[50%]"
+            alt=""
+          />
+        </span>
+        <p class="text-center text-[16px] font-[700] uppercase">
+          {{ user.name }}
+        </p>
+        <div class="text-center pt-[20px] pb-[10px]">Tóm tắt về Team</div>
+        <div>
+          <ul>
+            <li
+              class="flex justify-between border-[1px] border-[#9999] border-solid mx-[20px] bg-[#fff] px-[10px] py-[8px]"
+            >
+              <span>TỔNG CHI PHÍ TẤT CẢ CÁC DỰ ÁN</span>
+              <span>{{ numberWithComas(totalMoney) }} đ</span>
+            </li>
+            <li
+              class="flex justify-between border-[1px] border-[#9999] border-solid mx-[20px] bg-[#fff] px-[10px] py-[8px]"
+            >
+              <span>CÁC DỰ ÁN ĐANG CHỜ </span
+              ><span>{{ taskWaiting.length }}</span>
+            </li>
+            <li
+              class="flex justify-between border-[1px] border-[#9999] border-solid mx-[20px] bg-[#fff] px-[10px] py-[8px]"
+            >
+              <span>DỰ ÁN TRIỂN KHAI</span>
+              <span>{{ taskProcessing.length }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="w-[50%]">
+        <table class="w-full text-md text-left text-gray-500 dark:text-gray-400 mt-10">
+          <thead>
+            <tr>
+              <th class="border p-3 text-center">STT</th>
+              <th class="border p-3 text-center">
+                Tên sự án
+              </th>
+              <th class="border p-3 text-center">
+                Thời gian
+              </th>
+              <th class="border p-3 text-center">
+                Số thành viên
+              </th>
+              <th class="border p-3 text-center">
+                Tổng tiền
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of projects; index as i">
+              <td class="border p-3 text-center">{{ i + 1 }}</td>
+              <td class="border p-3 text-center">
+                <a
+                  class="w-full inline-block"
+                  [routerLink]="['/dashboard/project/',item.id]">
+                {{ item.name }}</a
+                >
+              </td>
+              <td class="border p-3 text-center">{{ item.date }}</td>
+              <td class="border p-3 text-center">
+                {{ item.employs }}
+              </td>
+              <td class="border p-3 text-center">
+                {{ item.totalMoney }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="w-[25%] bg-white h-full py-10">
+        <div class="text-center pb-[10px]">KHÁCH HÀNG</div>
+        <div *ngFor="let cus of customers">
+          <ul>
+            <li
+              class="flex justify-between border-[1px] border-[#9999] border-solid mx-[20px] bg-[#fff] px-[10px] py-[8px]"
+            >
+              {{ cus.name }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

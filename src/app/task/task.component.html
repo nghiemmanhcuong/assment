@@ -1,0 +1,24 @@
+<div class="w-[1270px] mx-auto my-0">
+      <form (ngSubmit)="onSubmit(taskForm)" #taskForm="ngForm">
+            <div class="form-group">
+                  <label class="mb-[5px]">Task Name</label>
+                  <input type="text" class="form-control w-[50%] block border-[#9999] border-[1px] mb-[10px]" [(ngModel)]="taskData.name" name="name" required minlength="6"
+                        #name="ngModel">
+                  <span *ngIf="!name?.valid && (name?.dirty||name?.touched)">Name không hợp lệ</span>
+            </div>
+            <div class="form-group">
+                  <label class="mt-[20px] mb-[5px] inline-block">Description</label>
+                  <input type="text" class="form-control w-[50%] block border-[#9999] border-[1px]" [(ngModel)]="taskData.description" name="description" required minlength="6"  #description="ngModel">
+                  <span *ngIf="!description?.valid && (description?.dirty||description?.touched)">Description không hợp lệ</span>
+            </div>
+            <div class="form-group">
+                  <label class="mt-[20px] mb-[5px] inline-block">Project</label>
+                  <select [(ngModel)]="taskData.project" class="form-control w-[50%] block border-[#9999] border-[1px]" name="projects" required   #projects="ngModel">
+                        <option *ngFor="let item of project">
+                              {{item.name}}
+                        </option>
+                  </select>
+            </div>
+            <button type="submit" class="btn btn-success cursor-pointer bg-blue-400 text-[#fff] px-[20px] mt-[30px] rounded-[5px] py-[10px]" [disabled]="!taskForm.valid">Create Task</button>
+      </form>
+</div>

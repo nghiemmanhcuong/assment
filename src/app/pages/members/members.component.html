@@ -1,0 +1,124 @@
+<div>
+  <h1 class="text-[30px] font-[500] py-[20px] text-center">
+    Quản lý thành viên
+  </h1>
+  <ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h1 class="font-[500] text-center text-[18px] pt-[10px]">New Project</h1>
+      <button
+        type="button"
+        class="btn-close bg-indigo-600 text-white flex items-center justify-center"
+        aria-label="Close"
+        (click)="d('Cross click')"
+      >x</button>
+    </div>
+    <form
+      (ngSubmit)="onSubmit(projectForm)"
+      #projectForm="ngForm"
+      class="px-4 py-3"
+    >
+      <div class="form-group">
+        <label class="mt-[20px] inline-block mb-[10px]">Tên thành viên</label>
+        <input
+          type="text"
+          class="form-control w-full block border-[#9999] border-[1px]"
+          [(ngModel)]="member.name"
+          name="name"
+          required
+          minlength="6"
+          #name="ngModel"
+        />
+        <p class="text-sm text-red-600" *ngIf="!name?.valid && (name?.dirty || name?.touched)"
+          >Tên thành viên không hợp lệ</p
+        >
+      </div>
+      <div class="form-group">
+        <label class="mt-[20px] inline-block mb-[10px]">Tuổi thành viên</label>
+        <input
+          type="number"
+          class="form-control w-full block border-[#9999] border-[1px]"
+          [(ngModel)]="member.age"
+          name="age"
+          required
+          #age="ngModel"
+        />
+        <p class="text-sm text-red-600" *ngIf="!age?.valid && (age?.dirty || age?.touched)"
+          >Tuổi thành viên không hợp lệ</p
+        >
+      </div>
+      <div class="form-group">
+        <label class="mt-[20px] inline-block mb-[10px]">Số điện thoại</label>
+        <input
+          type="number"
+          class="form-control w-full block border-[#9999] border-[1px]"
+          [(ngModel)]="member.phone"
+          name="phone"
+          required
+          #phone="ngModel"
+        />
+        <p class="text-sm text-red-600" *ngIf="!phone?.valid && (phone?.dirty || phone?.touched)"
+          >Số điện thoại không hợp lệ</p
+        >
+      </div>
+      <div class="form-group">
+        <label class="mt-[20px] inline-block mb-[10px]">Email</label>
+        <input
+          type="text"
+          class="form-control w-full block border-[#9999] border-[1px]"
+          [(ngModel)]="member.email"
+          name="email"
+          required
+          #email="ngModel"
+        />
+        <p class="text-sm text-red-600" *ngIf="!email?.valid && (email?.dirty || email?.touched)"
+          >Email không hợp lệ</p
+        >
+      </div>
+      <input type="hidden" [(ngModel)]="member.id" #id="ngModel" name="id" />
+      <button
+        type="submit"
+        class="btn btn-primary cursor-pointer bg-blue-400 text-[#fff] px-[20px] mt-[10px] rounded-[5px] py-[10px]"
+        [disabled]="!projectForm.valid"
+      >
+        Save
+      </button>
+    </form>
+  </ng-template>
+  <div class="w-[1200px] mx-auto">
+    <button
+      class="rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm mb-3"
+      (click)="open(content)"
+    >
+      Create member
+    </button>
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+      <thead>
+        <tr>
+          <th class="border p-3 text-center">STT</th>
+          <th class="border p-3 text-center">Name</th>
+          <th class="border p-3 text-center">Phone</th>
+          <th class="border p-3 text-center">Email</th>
+          <th class="border p-3 text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of members; index as i">
+          <th class="border p-3 text-center">{{ i + 1 }}</th>
+          <td class="border p-3 text-center">
+            {{ item.name }}
+          </td>
+          <td class="border p-3 text-center">
+            {{ item.phone }}
+          </td>
+          <td class="border p-3 text-center">
+            {{ item.email }}
+          </td>
+          <td class="border p-3 text-center">
+            <button class="btn btn-success mr-2" (click)="open(content,item.id)">Edit</button>
+            <button class="btn btn-danger" (click)="deleteMember(item.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

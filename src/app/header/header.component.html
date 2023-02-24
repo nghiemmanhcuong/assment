@@ -1,0 +1,40 @@
+<div class="flex justify-between bg-blue-600 py-[20px] text-[#fff] px-[20px]">
+  <div class="flex items-center">
+    <div class="text-[20px]">Quản Lý Dự Án FPoLy</div>
+    <ul class="flex">
+      <li class="px-[10px] text-[#fff] opacity-70">
+        <a routerLink="/dashboard" class="hover:text-white  ">Bảng điều khiển</a>
+      </li>
+      <li class="px-[10px] text-[#fff] opacity-70">
+        <a routerLink="/project" class="hover:text-white  ">Dự án</a>
+      </li>
+      <li class="px-[10px] text-[#fff] opacity-70">
+        <a routerLink="/employ" class="hover:text-white ">Quản lý task</a>
+      </li>
+      <li class="px-[10px] text-[#fff] opacity-70">
+        <a routerLink="/member" class="hover:text-white ">Quản lý thành viên</a>
+      </li>
+    </ul>
+  </div>
+  <div>
+    <div class="row">
+      <div class="col">
+        <div ngbDropdown class="d-inline-block">
+          <button
+            type="button"
+            class="btn btn-primary"
+            id="dropdownBasic1"
+            ngbDropdownToggle
+          >
+            Setting
+          </button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button ngbDropdownItem>Setting</button>
+            <button ngbDropdownItem>Information</button>
+            <a href=""><button ngbDropdownItem>Logout</button></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

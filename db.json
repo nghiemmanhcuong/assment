@@ -1,0 +1,120 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "name": "Dự án 1",
+      "status": "processing",
+      "totalMoney": 10000000,
+      "date": "22/11/2023",
+      "employs": 15
+    },
+    {
+      "id": 2,
+      "name": "Dự án 2",
+      "status": "processing",
+      "totalMoney": 10000000,
+      "date": "22/11/2023",
+      "employs": 6
+    },
+    {
+      "name": "Dự án 3",
+      "date": "22/11/2023",
+      "employs": 11,
+      "totalMoney": 10000000,
+      "status": "processing",
+      "members": [
+        "1",
+        "2"
+      ],
+      "id": 3
+    },
+    {
+      "name": "Dự án 4",
+      "date": "22/11/2023",
+      "employs": 22,
+      "totalMoney": 10000000,
+      "status": "processing",
+      "id": 4
+    },
+    {
+      "name": "Dự án 5",
+      "date": "22/11/2023",
+      "employs": 4,
+      "totalMoney": 10000000,
+      "status": "processing",
+      "members": [
+        "1",
+        "2"
+      ],
+      "id": 5
+    },
+    {
+      "name": "Kiến Thức Nhập Môn new",
+      "date": "2023-02-10",
+      "employs": 4,
+      "totalMoney": 111110,
+      "status": "waiting",
+      "id": 6
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "Nghiêm mạnh cường",
+      "isAdmin": true,
+      "location": "East",
+      "status": "Available",
+      "img": "https://images.pexels.com/photos/39866/entrepreneur-startup-start-up-man-39866.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "email": "nghiemmanhcuong98@gmail.com",
+      "pass": "123456"
+    }
+  ],
+  "customers": [
+    {
+      "id": 1,
+      "name": "ABC Cake Ld"
+    },
+    {
+      "id": 2,
+      "name": "FPT CORPORATE"
+    },
+    {
+      "id": 3,
+      "name": "SAMSUNG LD"
+    },
+    {
+      "id": 4,
+      "name": "FLC BUILDING"
+    },
+    {
+      "id": 5,
+      "name": "VNPT CORPORATE"
+    }
+  ],
+  "tasks": [
+    {
+      "name": "Task 1",
+      "description": "Thêm sửa xoá nhiều project",
+      "project": "Dự án 4",
+      "employee": "Nguyễn văn a 1",
+      "status": "done",
+      "id": 1
+    }
+  ],
+  "members": [
+    {
+      "name": "cường nghiêm mạnh2",
+      "age": 26,
+      "phone": 987954221,
+      "email": "nghiemmanhcuong98@gmail.com",
+      "id": 1
+    },
+    {
+      "name": "cường nghiêm mạnh",
+      "age": 32,
+      "phone": 987954221,
+      "email": "nghiemmanhcuong98@gmail.com",
+      "id": 2
+    }
+  ]
+}

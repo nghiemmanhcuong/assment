@@ -1,0 +1,180 @@
+<div class="w-full h-[800px]">
+  <div class="w-[1200px] mx-auto pt-5">
+    <h1
+      class="text-[20px] font-[700] py-[10px] text-center mx-[10px] rounded-[10px]"
+    >
+      Quản lý Task
+    </h1>
+    <div class="mt-1 mb-2">
+      <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h1 class="font-[500] text-center text-[18px] pt-[10px]">
+            New Project
+          </h1>
+          <button
+            type="button"
+            class="btn-close bg-indigo-600 text-white flex items-center justify-center"
+            aria-label="Close"
+            (click)="d('Cross click')"
+          >
+            X
+          </button>
+        </div>
+        <form (ngSubmit)="onSubmit(taskForm)" #taskForm="ngForm">
+          <div class="form-group">
+            <label class="mb-[5px] mt-[20px] ml-[20px]">Task Name</label>
+            <input
+              type="text"
+              class="form-control w-[90%] block border-[#9999] border-[1px] mx-[20px] mb-[10px]"
+              [(ngModel)]="taskData.name"
+              name="name"
+              required
+              minlength="6"
+              #name="ngModel"
+            />
+            <span
+              class="ml-[20px]"
+              *ngIf="!name?.valid && (name?.dirty || name?.touched)"
+              >Name không hợp lệ</span
+            >
+          </div>
+          <div class="form-group">
+            <label class="mt-[20px] mb-[5px] ml-[20px] inline-block"
+              >Description</label
+            >
+            <input
+              type="text"
+              class="form-control w-[90%] block border-[#9999] border-[1px] mx-[20px]"
+              [(ngModel)]="taskData.description"
+              name="description"
+              required
+              minlength="6"
+              #description="ngModel"
+            />
+            <span
+              class="ml-[20px]"
+              *ngIf="
+                !description?.valid &&
+                (description?.dirty || description?.touched)
+              "
+              >Description không hợp lệ</span
+            >
+          </div>
+          <div class="form-group">
+            <label class="mt-[20px] mb-[5px] ml-[20px] inline-block"
+              >Project</label
+            >
+            <select
+              [(ngModel)]="taskData.project"
+              class="form-control w-[90%] block border-[#9999] mx-[20px] border-[1px]"
+              name="project"
+              required
+              #project="ngModel"
+            >
+              <option *ngFor="let item of projects" value="{{ item.name }}">
+                {{ item.name }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="mt-[20px] mb-[5px] ml-[20px] inline-block"
+              >Employee</label
+            >
+            <input
+              type="text"
+              class="form-control w-[90%] block border-[#9999] border-[1px] mx-[20px]"
+              [(ngModel)]="taskData.employee"
+              name="employee"
+              required
+              minlength="6"
+              #employee="ngModel"
+            />
+            <span
+              class="ml-[20px]"
+              *ngIf="!employee?.valid && (employee?.dirty || employee?.touched)"
+              >Employee không hợp lệ</span
+            >
+          </div>
+          <div class="form-group px-4">
+            <label class="mt-[20px] mb-[10px] inline-block">Trạng thái</label>
+            <select
+              class="form-control w-full block border-[#9999] border-[1px]"
+              [(ngModel)]="taskData.status"
+              name="status"
+              required
+              #status="ngModel"
+            >
+              <option value="waiting">Đang chờ</option>
+              <option value="pending">Tạm dừng</option>
+              <option value="processing">Đã triển khai</option>
+              <option value="done">Đã xong</option>
+            </select>
+            <span
+              class="text-sm text-red-600"
+              *ngIf="!status?.valid && (status?.dirty || status?.touched)"
+              >Team size không hợp lệ</span
+            >
+          </div>
+          <input
+            type="hidden"
+            [(ngModel)]="taskData.id"
+            name="id"
+            #id="ngModel"
+          />
+          <div class="flex justify-center mb-[20px]">
+            <button
+              type="submit"
+              class="btn flex justify-center btn-success cursor-pointer bg-blue-400 text-[#fff] px-[20px] mt-[30px] rounded-[5px] py-[10px]"
+              [disabled]="!taskForm.valid"
+            >
+              Create Task
+            </button>
+          </div>
+        </form>
+      </ng-template>
+
+      <button
+        class="rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm mb-3"
+        (click)="open(content)"
+      >
+        Create Task
+      </button>
+    </div>
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+      <thead>
+        <tr>
+          <th scope="col" class="border p-3 text-center">STT</th>
+          <th scope="col" class="border p-3 text-center">Task Name</th>
+          <th scope="col" class="border p-3 text-center">Description</th>
+          <th scope="col" class="border p-3 text-center">Project Name</th>
+          <th scope="col" class="border p-3 text-center">Status</th>
+          <th scope="col" class="border p-3 text-center">Employee</th>
+          <th scope="col" class="border p-3 text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of tasks; let i = index">
+          <td class="border p-3 text-center">{{ i + 1 }}</td>
+          <td class="border p-3 text-center">{{ task.name }}</td>
+          <td class="border p-3 text-center">{{ task.description }}</td>
+          <td class="border p-3 text-center">{{ task.project }}</td>
+          <td class="border p-3 text-center">{{ task.status }}</td>
+          <td class="border p-3 text-center">{{ task.employee }}</td>
+          <td class="border p-3 text-center">
+            <button
+              class="btn btn-primary mx-1"
+              data-bs-toggle="modal"
+              data-bs-target="#staticBackdrop"
+              (click)="editProject(task.id, content)"
+            >
+              Sửa
+            </button>
+            <button class="btn btn-danger" (click)="removeTask(task.id)">
+              Xóa
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
